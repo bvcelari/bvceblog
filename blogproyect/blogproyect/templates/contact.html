@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %} {{ post.title }} {% endblock %}
+
+{% block content %}
+
+{% if correo_enviado %}
+ 	{{ correo_enviado }}
+{% else %}
+
+                                <div class="cajagrande">
+                                        <div class="tt"></div>
+                                        <div class="ff">
+                                                <div class="interior">
+<!--                                                 <a style="float: {% cycle 'right' 'left' %}" href="/publicidad/{{ contact.id }}">
+<img src="{{ contact.images.mi_thumb_image.thumbnail.url }}" class="imgc"></a> -->
+                                                <h2>Titulo contacto </h2>
+                                                <p>Si quieres ponerte en contacto conmigo.... </p>
+                                                </div>
+                                                </div>
+                                        <div class="bb"></div>
+                                </div>
+                <center>
+                        <div id="button-toggle_contact">
+                       	 <h3>Formulario Contacto</h3>
+			</div>
+                        <div class="contact_togg">
+                        	<form action="/contact/" method="post" >
+				        {% csrf_token %}
+
+					<div class="fieldWrapper">
+					<label for="name">Nombre:</label>
+						{{ my_contactform.name }}
+					
+					</div>
+					<div class="fieldWrapper">
+					<label for="surname">Apellidos:</label>
+					{{ my_contactform.surname }}
+					</div>
+					<div class="fieldWrapper">
+					<label for="phone">Tel&eacute;fono:</label>
+					{{ my_contactform.phone }}
+					</div>
+					<div class="fieldWrapper">
+					<label for="subject">Asunto:</label>
+					{{ my_contactform.subject }}
+					</div>
+					<div class="fieldWrapper">
+					<label for="comment">Comentarios:</label>
+					{{ my_contactform.comment }}
+					</div>
+					<div class="fieldWrapper">
+					<label for="email">Email:</label>
+					{{ my_contactform.email }}
+					</div>
+					<div class="fieldWrapper">
+					<span class="spa20">
+					&nbsp;
+					</span>
+                        	        <input class="btn_find" type="submit" value="Enviar">
+					</div>
+                        	</form>
+                        </div>  
+                </center>
+{% endif %}
+{% endblock content %}
+

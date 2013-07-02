@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+ 
+{% block title %}Search results{% endblock %}
+ 
+{% block content %}
+<h1>Archives :</h1>
+{% for post in results %}
+  <h3><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+  {% if not forloop.last %}
+    <hr/>
+  {% endif %}
+{% empty %}
+  <p class="label label-warning">No results for your query.</p>
+{% endfor %}
+ 
+{% endblock %}

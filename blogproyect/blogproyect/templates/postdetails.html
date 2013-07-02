@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+ 
+{% block title %} {{ post.title }} {% endblock %}
+ 
+{% block content %}
+ 
+  <article class="is-post is-post-excerpt">
+    <section>
+                  <header>
+                          <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+                          <span class="byline">{{ post.subtitle }} </span> 
+                  </header>
+
+
+                <div class="info">
+                        <span class="date">{{ post.publication_date|date:"F t " }} </span>
+                </div>
+      {{ post.content | safe }}
+    </section>
+    <aside>
+      <p class="label label-info">
+        Published on
+        <time>{{ post.publication_date|date:"r" }}</time>
+      </p>
+      <p>
+        <span class="badge badge-info">{{ post.commentary_set.count }}</span> commentar{{ post.commentary_set.count|pluralize:"y,ies" }}
+      </p>
+    </aside>
+    <h2 id="comments">Leave a commentary</h2>
+    <section>
+      <form action="{% url "postdetails" slug=post.machine_name %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Send" />
+      </form>
+      {% for commentary in post.commentary_set.all %}
+        <article class="well">
+          <p>{{ commentary.owner }} said on <time>{{ commentary.publication_date|date:"r" }}</time>:</p>
+          <blockquote>{{ commentary.content }}</blockquote>
+        </article>
+        {% if not forloop.last %}
+          <hr/>
+        {% endif %}
+      {% empty %}
+        <p class="label label-info">No comments at the moment.</p>
+      {% endfor %}
+    </section>
+  </article>
+ 
+{% endblock %}
