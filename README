@@ -1,0 +1,15 @@
+To install it, just:
+
+git clone https://github.com/bvcelari/bvceblog/
+ 
+If you are using pip....
+
+pip install yolk
+pip install django
+(Django Version: 	1.5.1)
+pip install django-tinymce
+pip install south
+
+#Create db folder...
+./manage.py syncdb
+
