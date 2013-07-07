@@ -10,6 +10,10 @@ pip install django
 pip install django-tinymce
 pip install south
 
+
 #Create db folder...
+mkdir  bvceblog/blogproyect/blogproyect/db
+#Create DDBB
 ./manage.py syncdb
+./manage.py migrate
 
